@@ -1,0 +1,356 @@
+body{
+	
+	margin: 0px;
+	
+}
+
+
+
+
+.popup{
+	
+	font-family: monospace;
+	margin: 0px;
+	
+	/*font-weight: bold;*/
+	/*font-size: 18px;*/
+	color:#000000;
+
+	
+}
+
+.titleImg{
+
+	cursor: pointer;
+	margin: 0px;
+	right:	0px;
+	position: 	absolute;
+	
+}
+
+.titleDiv{
+	
+	width:			200px;
+	height:			40px;
+	
+	background: 	#ffa500;
+	
+}
+
+.optionsButton{
+	
+	margin-top: 	4px;
+	margin-left:	4px;
+	cursor:			pointer;
+	opacity: 0.5;
+	
+}	
+
+p{
+	
+	margin-top: 0px;
+    margin-bottom: 0px;
+	
+	
+	
+}
+.blacktext{
+	
+	color: #000000;
+	font-weight: bold;
+	font-size:	16px;
+	
+}
+
+.blacktextsmall{
+	
+	color: #000000;
+	font-weight: bold;
+	font-size: 16px;
+	
+}
+.redtext{
+	
+	color: #FF0000;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.greentext{
+	
+	color: #00AA00;
+	font-weight: bold;
+	
+}
+
+.clockerTable{
+	font-size: 		18px;
+	width:			100%;
+	margin-top:		2px;
+	
+	border:			0px solid black;
+	margin-bottom:	0px;
+	
+	font-weight: 	bolds;
+	font-size:		20px;
+	color:          #a7feff;
+	
+}
+
+.tableDiv{
+	
+	font-weight: 	bolds;
+	font-size:		20px;
+	color:          #a7feff;
+	width:			200px;
+	height:			110px;
+	background: 	radial-gradient(circle, #0670f7, #17b4ff)
+	
+}
+
+.title{
+	
+	width:		 		100%;
+	text-align:			center;
+	font-weight:		bold;
+	height:				35px;
+	line-height:		48px;
+	background-color: 	orange;
+	color:				white;
+	border-radius: 		5px;
+	
+	
+}
+
+#myProgress {
+
+  margin-top: 			2px;
+  width: 				100%;
+  background-color: 	#e5e5e5;
+  border:				0px solid black;
+  -webkit-box-shadow: 	inset -1px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 		inset -1px 2px 4px rgba(0,0,0,0.2);
+	
+}
+
+#myBar {
+ font-family:		monospace;
+  width: 			00%;
+  height: 			15px;
+  background-color: #4CAF50;
+  text-align: 		center;
+  line-height: 		15px;
+  font-size:		12px;
+  color: 			white;
+  font-weight:	 	bold;
+  background: -webkit-repeating-linear-gradient(45deg,#74c274 0%, #74c274 5%,#5cb85c 5%,#5cb85c 10%);
+  background: -o-repeating-linear-gradient(45deg,#74c274 0%, #74c274 5%,#5cb85c 5%,#5cb85c 10%);
+  background: -moz-repeating-linear-gradient(45deg,#74c274 0%, #74c274 5%,#5cb85c 5%,#5cb85c 10%);
+  background: repeating-linear-gradient(135deg,#74c274 0%, #74c274 5%,#5cb85c 5%,#5cb85c 10%);
+  -webkit-box-shadow: 	inset 0 -5px 8px rgba(0,0,0,0.2);
+  box-shadow: 		inset 0 -5px 8px rgba(0,0,0,0.2),inset 1px 2px 4px rgba(0,0,0,0.2);
+  animation-name:	pbwidth, pbscroll;
+  animation-duration: 1s,2s;
+  background-attachment: fixed;
+  animation-iteration-count: 1,infinite;
+  background-position: 0px 0px;
+}
+/* ANIMATIONS */
+@keyframes pbwidth {
+  0%,100% {
+    transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+  }
+  0% {
+    width: 0px;
+	
+  }
+  100% {
+  }
+  
+}
+
+@keyframes pbscroll {
+  0%,100% {
+		
+		animation-timing-function: linear;
+  }
+  0% {
+	background-position: 0px 0px;
+  }
+  100% {
+    background-position: 0px 40px;
+  }
+  
+}
+
+
+
+
+
+
+.buttonWhite {
+	margin-top:		2px;
+    background-color: #ffffff; 
+    border: 2px solid rgba(0, 155, 0, 0.5);
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+}
+
+.buttonWhite:hover {
+	
+    background-color: #ddffdd; 
+    border: 2px solid rgba(0, 255, 0, 0.8);
+	/*
+	margin-top:		2px;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	*/
+}
+
+.buttonGreen {
+	margin-top:		2px;
+    background-color: #ffffff; 
+    border: 2px solid rgba(0, 155, 0, 0.8);
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	transition: all .15s ease-in-out;
+
+}
+
+.buttonGreen:hover {
+	
+    background-color: rgba(0, 200, 0, 0.8); 
+    border: 2px solid rgba(0, 155, 0, 0.8);
+	color: #FFFFFF;
+	/*
+	margin-top:		2px;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	*/
+}
+
+
+.buttonYellow {
+	margin-top:		2px;
+    background-color: #ffffff; 
+    border: 2px solid rgba(155, 155, 0, 0.5);
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	transition: all .15s ease-in-out;
+
+}
+
+.buttonYellow:hover {
+	
+	
+    background-color: rgba(200, 200, 0, 0.8); 
+    border: 2px solid rgba(155, 155, 0, 0.8);
+	color: #FFFFFF;
+	/*
+	margin-top:		2px;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	*/
+	
+}
+
+button:focus {outline:0;}
+
+.buttonPenalty {
+	
+	
+    background-color: #FFDDDD; 
+	margin-top:		2px;
+	border: 2px solid rgba(155, 0, 0, 0.8);
+    color: #000000;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	transition: all .15s ease-in-out;
+}
+
+.buttonPenalty:hover {
+	
+	
+    background-color: rgba(200, 0, 0, 1); 
+	border: 2px solid rgba(155, 0, 0, 1);
+	color: #FFFFFF;
+	
+	/*
+	margin-top:		2px;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 		5px;
+	*/
+}
+
+.buttonBarDiv{
+	
+	border:			0px;
+	
+	
+}
+
+
+  
+  
+.buttonPastoDiv{
+	margin-top:		2px;
+	border: 1px solid rgba(255, 0, 0, 0.8);
+	
+	
+}
+
+.optionsDiv{
+	
+	font-size: 16px;
+	font-family: sans-serif;
+}
+
+.changelog{
+	
+	font-size: 16px;
+	width: 			100%;
+	height: 			100%;
+	background-color: white;
+	color:			  black;
+	font-family: monospace;
+	padding:	40px;
+}

@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2,
+	"name": "nove31",
+	"version": "0.2.6",
+	"description": "calcola le ore lavorate e l'ora di uscita prevista.",
+	"content_scripts": [
+		{
+			"matches": ["*://remedy.gpi.it/arsys/forms/caleido/Home+Page/Default+Admin+View/?cacheid=*"],
+			"all_frames": true,
+			"js": ["jquery-3.2.1.min.js","common.js", "content.js"]
+			
+		}
+	],
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"scripts": ["common.js","background.js"],
+		"content_security_policy": "script-src 'self' 'unsafe-inline'; object-src 'self'"
+	},
+	"permissions": ["tabs","activeTab","storage", "notifications","alarms"],
+	
+	"icons": { "16": "icon16.png",
+				"48": "icon48.png",
+				"128": "icon128.png" }
+
+}
