@@ -95,7 +95,7 @@ function showInfoNotification(text) {
     chrome.notifications.create(
         'clockingReminder', {
             type: 'basic',
-            iconUrl: 'info.png',
+            iconUrl: 'images/info.png',
             title: "Informazione",
             message: text
         },
@@ -128,7 +128,7 @@ function showClockingWarning() {
         chrome.notifications.create(
             'clockingReminder', {
                 type: 'basic',
-                iconUrl: 'warning.png',
+                iconUrl: 'images/warning.png',
                 title: "ATTENZIONE",
                 message: "Hai timbrato l'entrata?"
             },
@@ -154,7 +154,7 @@ function showTimeUpWarning() {
         chrome.notifications.create(
             'clockingReminder', {
                 type: 'basic',
-                iconUrl: 'warning.png',
+                iconUrl: 'images/warning.png',
                 title: "ATTENZIONE",
                 message: "Timbra l'uscita! (+" + Math.floor((timeDiff / 1000) / 60) + " minuti)"
             },
@@ -177,7 +177,7 @@ function showNOInitError() {
         chrome.notifications.create(
             'clockingReminder', {
                 type: 'basic',
-                iconUrl: 'cross.png',
+                iconUrl: 'images/cross.png',
                 title: "ATTENZIONE",
                 message: "Le timbrature non ci sono oppure non sono state lette"
             },
@@ -198,7 +198,7 @@ function showTUpdateNotification() {
         chrome.notifications.create(
             'clockingReminder', {
                 type: 'basic',
-                iconUrl: 'okay.png',
+                iconUrl: 'images/okay.png',
                 title: "Okay",
                 message: "Timbrature aggiornate"
             },

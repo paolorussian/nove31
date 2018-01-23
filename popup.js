@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    $('#total').append("<div id='titleDiv' class='titleDiv'><img class='optionsButton' id='optionsButton' src='cog.png' title='Opzioni'/><img id='titleImg' class='titleImg' src='title.png'/></div>");
+    $('#total').append("<div id='titleDiv' class='titleDiv'><img class='optionsButton' id='optionsButton' src='images/cog.png' title='Opzioni'/><img id='titleImg' class='titleImg' src='images/title.png'/></div>");
 
 	$("#titleImg")[0].addEventListener('click', openTimbraturePage);
 	
