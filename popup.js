@@ -8,36 +8,15 @@ var timeLimitIn;
 
 (function($) {})(jQuery);
 
-
-//function nodeInsertedCallback(event) {
-//    console.log(event);
-//};
-
-
 document.addEventListener('DOMContentLoaded', function() {
 
+    $('#buttonBarDiv').show();
+    $("#optionsDiv").hide();
+    $('#tableDiv').show();
+    $('#myBar').show();
+    $("#optionsButton").css("opacity",0.5);
 
-
-    //lunchBreakDuration = localStorage.lunchBreakDuration;
 	loadFromLocalStorage();
-
-
-
-    $('#total').append("<div id='titleDiv' class='titleDiv'><img class='optionsButton' id='optionsButton' src='images/cog.png' title='Opzioni'/><img id='titleImg' class='titleImg' src='images/title.png'/></div>");
-
-	$("#titleImg")[0].addEventListener('click', openTimbraturePage);
-	
-
-    $("#optionsButton")[0].addEventListener('click', optionsClickHandler);
-
-    $('#total').append("<div id='tableDiv' class='tableDiv'></div>");
-    $('#tableDiv').append("<table id='timeTable' class='clockerTable'></table>");
-
-
-    $('#total').append("<div id='progressBarDiv' class='progressBarDiv'></div>");
-
-    $('#total').append("<div id='buttonBarDiv' class='buttonBarDiv'></div>");
-
 
 	
     chrome.runtime.sendMessage({
@@ -52,39 +31,56 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#total').append("ERRORE");
         }
     });
+    
+    $('#appVersion').append(chrome.app.getDetails().version);
 
-	
-	
-	
+	$("#titleImg")[0].addEventListener('click', openTimbraturePage);
+    $("#optionsButton")[0].addEventListener('click', optionsClickHandler);
+    $("#saveOptionsButton")[0].addEventListener('click', saveOptionsClickHandler);
+    $("#discardOptionsButton")[0].addEventListener('click', optionsClickHandler);
+    $("#testNotificationButton")[0].addEventListener('click', testNotificationButtonClickHandler);
 
+    if (playSoundOnNotifications == "checked") {
+        $("#showSoundNotificationsCB").prop("checked", true);
+    }
+    
+    var elements = $('[id^="tabButton"]');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("click", function(i) {
+        //window.alert("clicked "+i.currentTarget.id);
+
+        var k, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (k = 0; k < tabcontent.length; k++) {
+            tabcontent[k].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("tablinks");
+        for (k = 0; k < tablinks.length; k++) {
+            tablinks[k].className = tablinks[k].className.replace(" active", "");
+        }
+
+        document.getElementById(i.currentTarget.name).style.display = "block";
+        evt.currentTarget.className += " active";
+
+    });
+}
 
 });
 
 
 
-
 function openTimbraturePage(e){
-	
-	 var newURL = "http://remedy.gpi.it/arsys/shared/login.jsp";
-     chrome.tabs.create({ url: newURL });
-	
+    var newURL = "http://remedy.gpi.it/arsys/shared/login.jsp";
+    chrome.tabs.create({ url: newURL });
 }
 
 
 function createPopup() {
 
-
     $("#timeTable").empty();
-
     var dateNow = new Date();
-	//dateNow = new Date(new Date().setHours(17,0));
-
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
-
-		
-
-	
 	
 	
     if (timbrature == undefined || timbrature == null || timbrature.length == 0) {
@@ -108,9 +104,6 @@ function createPopup() {
 				$('#buttonBarDiv').append("<button id='navigateBtn' class='buttonWhite' style='width:200px' value='navigateBtn'>apri timbrature</button>");
 				
 				$("#navigateBtn")[0].addEventListener('click', openTimbraturePage);
-
-
-				
 			}
 		});
 		
@@ -124,37 +117,27 @@ function createPopup() {
 
 	
     timeLimitIn = new Date(timbrature[0].date);
-	//timeLimitInHH = localStorage.timeLimitInHH;
-	//timeLimitInMM = localStorage.timeLimitInMM;
+    
+    $('#timeLimitInHHInput').val(timeLimitInHH);
+    $('#timeLimitInMMInput').val(timeLimitInMM);
+    $('#lunchBreakDurationInput').val(lunchBreakDuration);
+
     timeLimitIn = new Date(timeLimitIn.setHours(timeLimitInHH, timeLimitInMM, 0));
     var isLate = (timbrature[0].date - timeLimitIn.getTime() > 0);
 
     if (timbrature.length == 3) {
-
-
 	
         var dateFinalBkp = dateFinal;
-	/*		
-        if (isLate && showPenalties) {
-            dateFinal = dateFinal + 30 * 60 * 1000;
-        }
-*/
         $('#timeTable').append("<tr><td class='' style='padding-left:5px;'>Uscita</td><td id='finalTime' class=''>" + pad(new Date(dateFinal).getHours(), 2) + ":" + pad(new Date(dateFinal).getMinutes(), 2) + "</td></tr>");
-
         if (isLate == true) {
             $('#finalTime').text($('#finalTime').text() + "*");
         }
-
         dateFinal = dateFinalBkp;
 
 
-
         ///////////////////// PROGRESS BAR ////////////////////////////////
-
         var diffMsA = timbrature[1].date - timbrature[0].date;
-//        var diffMinsA = Math.floor((diffMsA / 1000) / 60);
         var diffMsB = dateNow - timbrature[2].date;
-//        var diffMinsB = Math.floor((diffMsB / 1000) / 60);
         var extraTimeBlocks = 0;
 
         if (isLate && showPenalties) {
@@ -167,8 +150,6 @@ function createPopup() {
         if (workPctCapped > 100) workPctCapped = 100;
         if (workPctCapped < 0) workPctCapped = 0;
 
-
-
         if (simulateLunch == true) {
             $('#progressBarDiv').hide();
         } else {
@@ -177,35 +158,24 @@ function createPopup() {
 
 		var timeDiff = new Date() - new Date(dateFinal);
         
-		if ($('#myProgress').length == 0) {
-			
+		if ($('#myProgress').length == 0) {	
             $('#progressBarDiv').append("<div id='myProgress'><div id='myBar' style='width:" + Math.floor(workPctCapped) + "%'>" + Math.floor(workPct) + "%</div></div>");
 			
-			
         } else {
-
             $("#myBar").text(" " + Math.floor(workPct) + "% ");
             $("#myBar").css("width", Math.floor(workPct) + "%");
-			//$("#myBar").css("background-color","#4CAF50");
 			$("#myBar").css("animation-name","pbwidth, pbscroll");
 			$("#myBar").css("background-attachment","fixed");
-			//$("#myBar").css("repeating-linear-gradient","repeating-linear-gradient(45deg,#FFc274 0%, #FFc274 5%,#FFb85c 5%,#FFb85c 10%)");
         }
 		
 		if(timeDiff>0){
-			//var s=$("#myBar").text() + " (+"+Math.floor((timeDiff / 1000) / 60)+" min)";
+
 			s=$("#myBar").text()+"&nbsp;(+"+Math.floor((timeDiff / 1000) / 60)+"&nbsp;min)";			
 			$("#myBar").html(s);
-			
-			  $("#myBar").css("background","repeating-linear-gradient(135deg,#FF0000 0%, #FF0000 5%,#DD0000 5%,#DD0000 10%)");
-			  $("#myBar").css("background-attachment","fixed");
-			//$("#myBar").css("animation-name","pbwidth, pbscrollRed");
-			//$("#myBar").css("background-color","#FF0000");
+			$("#myBar").css("background","repeating-linear-gradient(135deg,#FF0000 0%, #FF0000 5%,#DD0000 5%,#DD0000 10%)");
+			$("#myBar").css("background-attachment","fixed");
 		}
 		
-
-        ////////////////////////////////////////////////////////////////////
-
         $('#penaltyToggle').show();
 
     } else if (timbrature.length == 1) {
@@ -213,11 +183,9 @@ function createPopup() {
 
         ////// SIMULA PAUSA PRANZO //////////////////////////////////////////////////////////////////////////////////
 
-
         timbrature_sim = [];
 
         if (simulateLunch == true) {
-
 
             var lunchDate = new Date().setHours(12, 30, 0);
 
@@ -229,26 +197,17 @@ function createPopup() {
 
             timbrature_sim.push(timbratura_dbg);
 
-
-
-
             timbratura_dbg = {
                 date: lunchDate + (lunchBreakDuration * 60 * 1000),
                 fake: true,
                 type: "Entrata"
             };
-
             timbrature_sim.push(timbratura_dbg);
-
         }
-
-
 
         for (var i = 0; i < timbrature_sim.length; i++) {
             $('#timeTable').append("<tr><td width='70%' style='padding-left:5px;'> " + timbrature_sim[i].type + "</td><td>" + pad(new Date(timbrature_sim[i].date).getHours(), 2) + ":" + pad(new Date(timbrature_sim[i].date).getMinutes(), 2) + "</td></tr>");
         }
-
-
 
 
         if (simulateLunch == true) {
@@ -276,8 +235,6 @@ function createPopup() {
         }
 
 
-        //$('#penaltyToggle').hide();
-
         if ($('#buttonPasto').length == 0) {
             $('#buttonBarDiv').append("<button id='buttonPasto' class='buttonWhite' style='width:200px' id='lunchToggle' value='aggiungiPasto' style=''>aggiungi pasto</button>");
             $("#buttonPasto")[0].addEventListener('click', pastoToggleClickHandler);
@@ -287,24 +244,18 @@ function createPopup() {
             $('#penaltyToggle').hide();
         }
 
-
-
         if (simulateLunch == true) {
             $("#buttonPasto").text("rimuovi pasto");
             $("#buttonPasto").attr('value', 'rimuoviPasto');
-
 
         }
 
     }
 
 
-
     /////////////////////////////////////////////////////////////////////////////////////////	
 
-    //if (isLate) {
     if ((simulateLunch && isLate) || (isLate && timbrature.length == 3)) {
-
 
         $('#penaltyToggle').show();
         if ($('#penaltyToggle').length == 0) {
@@ -327,8 +278,6 @@ function createPopup() {
 
         }
 
-
-      
     }
 
     var lunchPatch = 0;
@@ -338,60 +287,35 @@ function createPopup() {
 
     }
 
-
-
-
 }
 
 
 
 function penaltyToggleClickHandler(e) {
-
     $('#timeTable').empty();
-
-
     showPenalties = !showPenalties;
-
 	dateFinal = new Date(calculateDateFinal(timbrature,showPenalties));
-	
-    createPopup();
-
-
-
-
+	createPopup();
 }
-
 
 function pastoToggleClickHandler(e) {
 
     $('#timeTable').empty();
-
     simulateLunch = !simulateLunch;
-
     if (simulateLunch) {
         showPenalties = true;
     }
-
     createPopup();
-
-
-
 }
 
 function optionsClickHandler(e) {
-
-
     showOptions = !showOptions;
-
-
-
     if (showOptions == true) {
         $('#buttonBarDiv').hide();
         $('#tableDiv').hide();
         $('#myBar').hide();
         $("#optionsDiv").show();
 		$("#optionsButton").css("opacity",1)
-        showOptionsPage();
     } else {
         $('#buttonBarDiv').show();
         $("#optionsDiv").hide();
@@ -400,79 +324,22 @@ function optionsClickHandler(e) {
 		$("#optionsButton").css("opacity",0.5)
         createPopup();
     }
-
 }
 
-
-function showOptionsPage() {
-
-	
-	
-
-    if ($('#optionsDiv').length == 0) {
-        $('#total').append("<div id='optionsDiv' class='optionsDiv'></div>");
-
-		
-        $('#optionsDiv').append("<p>Versione: " + chrome.app.getDetails().version + "</p>");
-        $('#optionsDiv').append("</br>");
-
-		
-		$('#optionsDiv').append("Ora limite entrata ");
-        $('#optionsDiv').append(" <input type='text' id='timeLimitInHHInput' value='" + timeLimitInHH + "' style='width: 18px;'/>:<input type='text' id='timeLimitInMMInput' value='" + timeLimitInMM + "' style='width: 18px;'/></br>");
-		
-		$('#optionsDiv').append("</br>");
-        $('#optionsDiv').append("Durata pausa pranzo simulata:");
-        $('#optionsDiv').append(" <input type='text' id='lunchBreakDurationInput' value='" + lunchBreakDuration + "' style='width: 20px;'/> min");
-
-        $('#optionsDiv').append("</br></br>");
-        $('#optionsDiv').append("<p>Mostra notifiche: <input id='showChromeNotificationsCB' type='checkbox'></input><input id='testNotificationButton' type='button' value='test'></input></p>");
-        if (showChromeNotifications == "checked") {
-            $("#showChromeNotificationsCB").prop("checked", true);
-        }
-		
-		$("#testNotificationButton")[0].addEventListener('click', testNotificationButtonClickHandler);
-		
-		
-		$('#optionsDiv').append("<p>Notifiche sonanti: <input id='showSoundNotificationsCB' type='checkbox'></input></p>");
-        if (playSoundOnNotifications == "checked") {
-            $("#showSoundNotificationsCB").prop("checked", true);
-        }
-
-		
-
-        $('#optionsDiv').append("<button class='buttonGreen' style='width:99px' id='saveOptionsButton' value='salva'>Salva</button><button class='buttonYellow' style='width:99px;margin-left:2px;' id='discardOptionsButton' value='annulla'>Annulla</button>");
-
-        $("#saveOptionsButton")[0].addEventListener('click', saveOptionsClickHandler);
-        $("#discardOptionsButton")[0].addEventListener('click', optionsClickHandler);
-
-
-    }
-
-
-}
 
 
 function testNotificationButtonClickHandler(e){
-	
-	
 	chrome.runtime.sendMessage({
         message: "SHOW_INFO_NOTIFICATION",
 		value: "Prova!"
-    }, function(response) {
-       
-    });
-	
-	
+    }, function(response) {});
 }
 
 
 function saveOptionsClickHandler(e) {
-
-
     
     lunchBreakDuration = $("#lunchBreakDurationInput").val();
 	localStorage.lunchBreakDuration = lunchBreakDuration;
-
 	localStorage.timeLimitInHH= $("#timeLimitInHHInput").val();
 	localStorage.timeLimitInMM= $("#timeLimitInMMInput").val();	
 
@@ -489,17 +356,12 @@ function saveOptionsClickHandler(e) {
     } else {
         localStorage.playSoundOnNotifications = "";
     }
-	
-	
-	
-//	loadFromLocalStorage()
-    window.close();
+
+    //window.close();
 }
 
 
 function reloadPageClickHandler(e) {
-
     chrome.tabs.reload();
     window.close();
-
 }

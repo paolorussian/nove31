@@ -5,8 +5,61 @@
 		<script src="jquery-3.2.1.min.js"></script>
 		<script src="common.js"></script>
 	</head>
-	<body style="width: 200px">
-		<div id="total" class="popup"></div>
+	<body style="width: 222px">
+
+		<!--<button id="test">XXX</button>-->
+		<div id="total" class="popup">
+			
+			<!-- title -->
+			<div id='titleDiv' class='titleDiv'>
+				<img class='optionsButton' id='optionsButton' src='images/cog.png' title='Opzioni'/>
+				<img id='titleImg' class='titleImg' src='images/title.png'/>
+			</div>
+
+
+			<!-- main page -->
+			<div >
+				<table style="width: 100%; height: 100%; border-collapse:collapse;">
+					<tr>
+						<td style="width: 36px;">
+							<ol>
+								<li><button id="tabButton1" name="tableDiv" class="tablinks">1</button></li>
+								<li><button id="tabButton2" name="optionsDiv" class="tablinks">2</button></li>
+							
+							</ol>
+						</td>
+						<td>
+							<div id='tableDiv' class='tableDiv, tabContent' style="width:180px;">
+								<table id='timeTable' class='clockerTable'></table>
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<div id='progressBarDiv' class='progressBarDiv'></div>
+				<div id='buttonBarDiv' class='buttonBarDiv'></div>
+			</div>
+
+			<!-- options -->
+			<div id='optionsDiv' class='optionsDiv, tabcontent' >
+				
+
+				<ol>
+					<li id="appVersion">Versione: </li>
+					<li>Ora limite entrata <input type='text' id='timeLimitInHHInput' value='timeLimitInHH' style='width: 18px;'/>:<input type='text' id='timeLimitInMMInput' value='timeLimitInMM' style='width: 18px;'/></li>
+					<li>Durata pranzo minimo <input type='text' id='lunchBreakDurationInput' value='lunchBreakDuration' style='width: 20px;'/> min</li>
+					<li></li>
+					<li><p>Mostra notifiche: <input id='showChromeNotificationsCB' type='checkbox' /><input id='testNotificationButton' type='button' value='test' /></p></li>
+					<li>Notifiche sonanti: <input id='showSoundNotificationsCB' type='checkbox' /></li>
+				</ol> 
+				<button class='buttonGreen' style='width: 45%;margin-left: 10px;' id='saveOptionsButton' value='salva'>Salva</button>
+				<button class='buttonYellow' style='width: 45%;margin-left: 0px;' id='discardOptionsButton' value='annulla'>Annulla</button>
+			</div>
+
+
+
+		</div>
+
 		<script src="popup.js"></script>
 	</body>
 </html>
