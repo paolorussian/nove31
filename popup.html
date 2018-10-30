@@ -1,65 +1,90 @@
 <!DOCTYPE html>
 <html lang="it">
 	<head>
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="css/styles.css">
 		<script src="jquery-3.2.1.min.js"></script>
 		<script src="common.js"></script>
+		<link href="css/fontawesome.css" rel="stylesheet">
+		<link href="css/solid.css" rel="stylesheet">
 	</head>
-	<body style="width: 222px">
-
-		<!--<button id="test">XXX</button>-->
+	<body>
 		<div id="total" class="popup">
-			
 			<!-- title -->
-			<div id='titleDiv' class='titleDiv'>
-				<img class='optionsButton' id='optionsButton' src='images/cog.png' title='Opzioni'/>
+			<div id='titleDiv' class='titleDiv' alt="vai alla pagina iniziale">
 				<img id='titleImg' class='titleImg' src='images/title.png'/>
 			</div>
-
-
-			<!-- main page -->
-			<div >
+			<div style="margin: 5px; overflow: overlay;">
 				<table style="width: 100%; height: 100%; border-collapse:collapse;">
 					<tr>
-						<td style="width: 36px;">
-							<ol>
-								<li><button id="tabButton1" name="tableDiv" class="tablinks">1</button></li>
-								<li><button id="tabButton2" name="optionsDiv" class="tablinks">2</button></li>
-							
+						<td style="width: 36px; vertical-align: top;">
+							<ol class="mainButtonBar">
+								<li id="tabButtonMain" name="mainDiv"><i class="fas fa-clock fa-2x" class="tablinks"></i></li>
+								<li id="tabButtonQuickLinks" name="quickLinksDiv"><i class="fas fa-bolt fa-2x" class="tablinks"></i></li>
+								<li id="tabButtonOptions" name="optionsDiv"><i class="fas fa-cog fa-2x" class="tablinks"></i></li>
 							</ol>
 						</td>
 						<td>
-							<div id='tableDiv' class='tableDiv, tabContent' style="width:180px;">
-								<table id='timeTable' class='clockerTable'></table>
+								<div id='missingCongifDiv' class='tabContent'>
+									<b>Configurazione necessaria</b><br/>(ci metterai un attimo, promesso!)<br/><br/>
+									Devi cliccare prima sul tab delle opzioni subito qui a sinistra (quello con l'ingranaggio)
+									e impostare l'indirizzo del sito delle presenze.<br/><br/>
+									Per esempio se l'url della pagina &egrave;
+									<br/>"https://<font style="color:red">presenze.sito.it</font>/xxx/yyy/eccetera"<br/>
+									devi impostare "<b>presenze.sito.it</b>", senza le virgolette e premere "salva".<br/><br/>
+									Senza sapere l'url della pagina delle timbrature questa estensione di Chrome 
+									non pu&ograve; funzionare!<br/><br/>
+									
+									
+								</div>
+							<!-- main page -->
+							<div id='mainDiv' class='mainDiv, tabContent'>
+								<div class="tableMainDiv" id="tableDiv">
+									<table id='timeTable' class='clockerTable'></table>
+								</div>
+								<div id='progressBarDiv' class='progressBarDiv'></div>
+								<div id='buttonBarDiv' class='buttonBarDiv'></div>
+								
+							</div>
+							<!-- quick links page -->
+							<div id='quickLinksDiv' class='quickLinksDiv, tabContent'>
+								<div class="tabInnerContent">
+									<table cellspacing="1" cellpadding="1" style="width: 100%;height: 135px;text-align: center; margin-top: 10px;">
+									<tr>
+										<td id="quickLink1" class="quickLinkButton"><i class="fas fa-stopwatch fa-3x"></i><br/>timbrature</td>
+										<td id="quickLink2" class="quickLinkButton"><i class="fas fa-umbrella-beach fa-3x"></i><br>controllo assenze</td>
+										<td id="quickLink3" class="quickLinkButton"><i class="fas fa-file-signature fa-3x"></i><br>rapportini</td>
+									</tr>
+									<tr>
+										<td id="quickLink4" class="quickLinkButton"><i class="fas fa-drafting-compass fa-3x"></i><br>cruscotto del dipendente</td>
+										<td id="quickLink5" class="quickLinkButton"><i class="fas fa-network-wired fa-3x"></i><br>VPN</td>
+										<td id="quickLink6" class="quickLinkButton"><i class="fas fa-euro-sign fa-3x"></i><br>note spese</td>
+									</tr>
+									</table>
+								</div>
+							</div>
+							<!-- options -->
+							<div id='optionsDiv' class='optionsDiv, tabContent'>
+								<div class="tabInnerContent">
+									<ol class="optionsList">
+										<li id="appVersion">Versione: </li>
+										<li><hr/></li>
+										<li>Url base <input type='text' id='baseUrlInput' value='' style='width: 100px;'/> esempio 'remedy.abc.it' (senza apici)</li>
+										<li>&nbsp;</li>
+										<li>Ora limite entrata <input type='text' id='timeLimitInHHInput' value='9' style='width: 18px;'/>:<input type='text' id='timeLimitInMMInput' value='30' style='width: 18px;'/></li>
+										<li>Durata pranzo minimo <input type='text' id='lunchBreakDurationInput' value='30' style='width: 20px;'/> min</li>
+										<li></li>
+										<li><p>Mostra notifiche: <input id='showChromeNotificationsCB' type='checkbox' /><input id='testNotificationButton' type='button' value='test' /></p></li>
+										<li>Notifiche sonanti: <input id='showSoundNotificationsCB' type='checkbox' /></li>
+									</ol> 
+									<button class='buttonGreen' style='width: 45%;margin-left: 10px;' id='saveOptionsButton' value='salva'>Salva</button>
+									<button class='buttonYellow' style='width: 45%;margin-left: 0px;' id='discardOptionsButton' value='annulla'>Annulla</button>
+								</div>
 							</div>
 						</td>
 					</tr>
 				</table>
-				
-				<div id='progressBarDiv' class='progressBarDiv'></div>
-				<div id='buttonBarDiv' class='buttonBarDiv'></div>
 			</div>
-
-			<!-- options -->
-			<div id='optionsDiv' class='optionsDiv, tabcontent' >
-				
-
-				<ol>
-					<li id="appVersion">Versione: </li>
-					<li>Ora limite entrata <input type='text' id='timeLimitInHHInput' value='timeLimitInHH' style='width: 18px;'/>:<input type='text' id='timeLimitInMMInput' value='timeLimitInMM' style='width: 18px;'/></li>
-					<li>Durata pranzo minimo <input type='text' id='lunchBreakDurationInput' value='lunchBreakDuration' style='width: 20px;'/> min</li>
-					<li></li>
-					<li><p>Mostra notifiche: <input id='showChromeNotificationsCB' type='checkbox' /><input id='testNotificationButton' type='button' value='test' /></p></li>
-					<li>Notifiche sonanti: <input id='showSoundNotificationsCB' type='checkbox' /></li>
-				</ol> 
-				<button class='buttonGreen' style='width: 45%;margin-left: 10px;' id='saveOptionsButton' value='salva'>Salva</button>
-				<button class='buttonYellow' style='width: 45%;margin-left: 0px;' id='discardOptionsButton' value='annulla'>Annulla</button>
-			</div>
-
-
-
 		</div>
-
 		<script src="popup.js"></script>
 	</body>
 </html>

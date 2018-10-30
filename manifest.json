@@ -1,11 +1,11 @@
 {
 	"manifest_version": 2,
 	"name": "nove31",
-	"version": "0.2.6",
+	"version": "0.3",
 	"description": "calcola le ore lavorate e l'ora di uscita prevista.",
 	"content_scripts": [
 		{
-			"matches": ["*://remedy.gpi.it/arsys/forms/caleido/Home+Page/Default+Admin+View/?cacheid=*"],
+			"matches": ["<all_urls>"],
 			"all_frames": true,
 			"js": ["jquery-3.2.1.min.js","common.js", "content.js"]
 			

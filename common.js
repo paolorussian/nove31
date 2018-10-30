@@ -3,9 +3,9 @@ var lastParse;
 var timeLimitInHH;
 var timeLimitInMM;
 var lunchBreakDuration;
-var appUrl = "remedy.gpi.it/arsys/forms/caleido/Home+Page/Default+Admin+View/?cacheid";
+var baseUrl;
+var appUrl;
 var playSoundOnNotifications;
-
 var timeLimitInHH_DEFAULT 			= 9;
 var timeLimitInMM_DEFAULT 			= 30;
 var lunchBreakDuration_DEFAULT		= 45;
@@ -13,16 +13,11 @@ var showChromeNotifications_DEFAULT	= "checked";
 var playSoundOnNotifications_DEFAULT	= "";
 var penaltyTime=0;
 
-
-
-
-
 function pad(num, size) {
 	var s = num + "";
     while (s.length < size) s = "0" + s;
     return s;
 }
-
 
 function loadFromLocalStorage(){
 	
@@ -31,11 +26,8 @@ function loadFromLocalStorage(){
 	lastParse				= localStorage.lastParse;
 	timeLimitInHH 			= localStorage.timeLimitInHH;
 	timeLimitInMM 			= localStorage.timeLimitInMM;
-	lunchBreakDuration 		= localStorage.lunchBreakDuration;
-	
-
-	
-	
+    lunchBreakDuration 		= localStorage.lunchBreakDuration;
+    baseUrl                 = localStorage.baseUrl;
 	
 	if(timeLimitInHH==undefined || timeLimitInHH == null || timeLimitInHH=="undefined"){
 		timeLimitInHH=timeLimitInHH_DEFAULT;
@@ -44,22 +36,24 @@ function loadFromLocalStorage(){
 		timeLimitInMM=timeLimitInMM_DEFAULT;
 	}
 	
-	 if (lunchBreakDuration == null || lunchBreakDuration == undefined || lunchBreakDuration == "undefined") {
+	if (lunchBreakDuration == null || lunchBreakDuration == undefined || lunchBreakDuration == "undefined") {
         lunchBreakDuration = lunchBreakDuration_DEFAULT;
     }
 
-   
     if (showChromeNotifications == null || showChromeNotifications == undefined || showChromeNotifications == "undefined") {
         showChromeNotifications = showChromeNotifications_DEFAULT;
 
     }
 	
-	   
     if (playSoundOnNotifications == null || playSoundOnNotifications == undefined || playSoundOnNotifications == "undefined") {
         playSoundOnNotifications = playSoundOnNotifications_DEFAULT;
 
     }
-	
+
+    if (baseUrl != null) {
+        appUrl = baseUrl+"/arsys/forms/caleido/Home+Page/Default+Admin+View/?cacheid";
+
+    }
 }
 
 function calculateDateFinal(timb_array, showPenalties) {
