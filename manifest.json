@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "nove31",
-	"version": "0.3",
+	"version": "0.4",
 	"description": "calcola le ore lavorate e l'ora di uscita prevista.",
 	"content_scripts": [
 		{
