@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         message: "GET_DATA"
     }, function(response) {
 
-        console.log("POPUP: received GET_DATA response=" + response);
+        console.log("POPUP: received GET_DATA response:");
+        console.log(response);
 
         if (response != undefined) {
             timbrature = response.value;

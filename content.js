@@ -12,7 +12,7 @@ window.startObserve = function() {
 				
 				var dateFinal = calculateDateFinal(timbrature,true);
 				
-				if(dateFinal) {
+				//if(dateFinal) {
 					chrome.runtime.sendMessage({
 						message: "UPDATE_TIMBRATURE_FROM_CONTENTSCRIPT",
 						value: timbrature,
@@ -33,8 +33,8 @@ window.startObserve = function() {
 						value: today
 					}, function(response) {});
 				
-			}
-		}			
+			//}
+		}		
 	}
 
 });
@@ -70,6 +70,9 @@ function parseDOM() {
         var day = dateString.split(" ")[0];
         var time = dateString.split(" ")[1];
         var date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(":")[0], time.split(":")[1], time.split(":")[2]);
+		if (date == null) {
+			date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(".")[0], time.split(".")[1], time.split(".")[2]);
+		}
         var type = $($(results[i]).find("td")[1]).find("nobr").find("span").html();
         var timbratura = {
 			date: date.getTime(),
