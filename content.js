@@ -69,9 +69,10 @@ function parseDOM() {
         var dateString = $($(results[i]).find("td")[0]).find("nobr").find("span").html();
         var day = dateString.split(" ")[0];
         var time = dateString.split(" ")[1];
-        var date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(":")[0], time.split(":")[1], time.split(":")[2]);
-		if (date == null) {
-			date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(".")[0], time.split(".")[1], time.split(".")[2]);
+        var date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(".")[0], time.split(".")[1], time.split(".")[2]);
+		
+		if (isNaN(date.getTime())) {
+			date = new Date(day.split("/")[2], day.split("/")[1] - 1, day.split("/")[0], time.split(":")[0], time.split(":")[1], time.split(":")[2]);	
 		}
         var type = $($(results[i]).find("td")[1]).find("nobr").find("span").html();
         var timbratura = {
